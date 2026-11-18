@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sponsor Compass Checklist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=DM+Sans:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: deep-teal banner, summary tiles, one milestone Gantt, then seven colour-coded phase cards that run in date order. */
+:root{
+  --ink:#18212f; --mute:#566176; --line:#dde4ef; --paper:#f3f6fb; --card:#ffffff;
+  --brand:#0c5560; --brand2:#2f6fed; --gold:#e3a72f;
+  --done:#14854f; --doing:#2f6fed; --block:#d03a3a; --todo:#7b8699;
+  --p1:#0f8a6e; --p2:#2f6fed; --p3:#8b5cf6; --p4:#e0457b; --p5:#f08a24; --p6:#14a3c7; --p7:#c99a1e;
+  --font-d:'Bricolage Grotesque','Trebuchet MS',system-ui,sans-serif;
+  --font-b:'DM Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+  color-scheme: light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);font:400 15px/1.5 var(--font-b);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px 56px}
+
+/* banner */
+.banner{background:linear-gradient(120deg,#0a4a53 0%,#0c5560 45%,#2a58c9 100%);color:#fff;position:relative;overflow:hidden}
+.banner::after{content:"";position:absolute;right:-60px;top:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(227,167,47,.55),rgba(227,167,47,0) 70%)}
+.banner .wrap{padding-top:28px;padding-bottom:26px;position:relative;z-index:1}
+.bismillah{font:700 clamp(30px,6vw,48px)/1.5 'Amiri','Traditional Arabic','Scheherazade New',serif;color:#ffd98a;text-align:center;margin:0 0 14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.25);direction:rtl;text-shadow:0 2px 12px rgba(0,0,0,.25)}
+.bismillah small{display:block;font:500 12.5px/1.4 var(--font-b);letter-spacing:.08em;color:#dbe8f5;direction:ltr;text-shadow:none}
+.eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:#ffd98a;margin:0 0 6px}
+h1{font:800 clamp(26px,4.4vw,40px)/1.1 var(--font-d);margin:0 0 8px;text-wrap:balance}
+.banner p.sub{margin:0;max-width:62ch;color:#dbe8f5}
+.banner-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.stage-card{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:10px 12px}
+.stage-card b{display:block;font:800 14px var(--font-d);letter-spacing:.06em;text-transform:uppercase;color:#ffd98a}
+.stage-card span{font-size:13.5px;color:#eef5ff}
+
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:#fff;color:var(--ink);padding:8px 14px;border-radius:10px;cursor:pointer;font-weight:500;text-decoration:none;line-height:1.2}
+.btn:hover{border-color:var(--brand2);box-shadow:0 2px 8px rgba(47,111,237,.18)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#1d1604;font-weight:700}
+.btn.gold:hover{box-shadow:0 2px 10px rgba(227,167,47,.5)}
+.btn.small{padding:5px 10px;font-size:13px}
+.btn.armed{background:var(--block);border-color:var(--block);color:#fff}
+
+/* summary tiles */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:-18px 0 18px;position:relative;z-index:2}
+.tile{background:var(--card);border-radius:14px;padding:14px 16px;box-shadow:0 4px 16px rgba(24,33,47,.09);border-top:5px solid var(--t,var(--brand))}
+.tile small{display:block;color:var(--mute);font-weight:700;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase}
+.tile strong{display:block;font:800 28px/1.15 var(--font-d);font-variant-numeric:tabular-nums;margin-top:2px}
+.tile em{font-style:normal;color:var(--mute);font-size:13px}
+.meter{height:8px;border-radius:99px;background:#e6ecf5;margin-top:8px;overflow:hidden}
+.meter i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--p1),var(--p2),var(--p3),var(--p4));transition:width .3s}
+
+/* toolbar */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px 14px;align-items:end;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:18px}
+.field{display:flex;flex-direction:column;gap:3px;font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.04em;text-transform:uppercase}
+.field input,.field select{border:1px solid var(--line);border-radius:8px;padding:7px 9px;background:#fff;font-weight:500;text-transform:none;letter-spacing:0;font-size:14px;color:var(--ink)}
+.switch{display:flex;align-items:center;gap:8px;padding-bottom:8px;font-weight:500;cursor:pointer}
+.switch input{width:18px;height:18px;accent-color:var(--brand2)}
+.tb-spacer{flex:1}
+.tb-group{display:flex;flex-wrap:wrap;gap:8px}
+
+/* gantt */
+h2{font:800 22px/1.2 var(--font-d);margin:0 0 4px}
+.sec-sub{margin:0 0 12px;color:var(--mute)}
+.gantt-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:26px;box-shadow:0 2px 10px rgba(24,33,47,.05)}
+.gantt-scroll{overflow-x:auto}
+.gantt{min-width:900px;position:relative}
+.g-row{display:grid;grid-template-columns:210px 1fr;align-items:start}
+.g-label{padding:8px 10px 0 0;font-weight:700;font-size:13.5px;line-height:1.25;cursor:pointer;background:none;border:0;text-align:left;color:var(--ink)}
+.g-label:hover{text-decoration:underline}
+.g-label small{display:block;font-weight:500;color:var(--mute);font-size:12px}
+.g-label .dot{display:inline-block;width:10px;height:10px;border-radius:3px;background:var(--pc);margin-right:6px}
+.g-head{border-bottom:2px solid var(--line);margin-bottom:4px}
+.weeks{display:grid;grid-template-columns:repeat(var(--n),1fr)}
+.wk{border-left:1px solid var(--line);padding:2px 0 4px 4px;font-size:11px;color:var(--mute);line-height:1.2}
+.wk b{display:block;color:var(--ink);font-size:11.5px}
+.track{position:relative;height:60px;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:var(--wk) 100%}
+.track.thin{height:24px}
+.bar{position:absolute;top:8px;height:22px;border-radius:7px;background:color-mix(in srgb,var(--pc) 26%,#fff);border:1px solid color-mix(in srgb,var(--pc) 60%,#fff);overflow:hidden}
+.bar i{position:absolute;inset:0 auto 0 0;background:var(--pc);border-radius:6px 0 0 6px}
+.bar em{position:absolute;left:5px;top:50%;transform:translateY(-50%);background:#fff;border-radius:99px;padding:0 6px;font:700 11px/16px var(--font-b);font-style:normal;color:var(--ink);font-variant-numeric:tabular-nums}
+.dia{position:absolute;top:19px;width:18px;height:18px;transform:translate(-50%,-50%) rotate(45deg);border-radius:3px;border:3px solid var(--pc);background:#fff;z-index:2}
+.dia.k-done{background:var(--done);border-color:var(--done)}
+.dia.k-doing{background:var(--doing);border-color:var(--doing)}
+.dia.k-blocked,.dia.k-over{background:var(--block);border-color:var(--block)}
+.mspill{position:absolute;top:34px;z-index:3;white-space:nowrap;font-size:11.5px;font-weight:700;padding:2px 9px;border-radius:99px;background:#fff;border:1.5px solid var(--sc);color:var(--ink);box-shadow:0 1px 4px rgba(24,33,47,.1)}
+.k-done{--sc:var(--done)} .k-doing{--sc:var(--doing)} .k-blocked,.k-over{--sc:var(--block)} .k-todo{--sc:var(--todo)}
+.tbar{position:absolute;top:7px;height:10px;border-radius:5px;background:var(--bc)}
+.tbar.k-todo{background:color-mix(in srgb,var(--pc) 45%,#fff)}
+.tbar.k-doing{background:var(--doing)} .tbar.k-done{background:var(--done)} .tbar.k-blocked{background:var(--block)}
+.g-row.trow .g-label{font-weight:500;font-size:12.5px;padding:3px 10px 0 18px;cursor:default;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-row.trow .g-label:hover{text-decoration:none}
+.today{position:absolute;top:0;bottom:0;width:0;border-left:2px dashed var(--block);z-index:4;pointer-events:none}
+.today span{position:absolute;top:-2px;left:4px;background:var(--block);color:#fff;font-size:10.5px;font-weight:700;padding:0 6px;border-radius:4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:12px;font-size:12.5px;color:var(--mute)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend .sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.legend .dm{width:11px;height:11px;transform:rotate(45deg);border-radius:2px;display:inline-block}
+
+/* phases */
+.phase{background:var(--card);border:1px solid var(--line);border-left:8px solid var(--pc);border-radius:14px;margin-bottom:14px;box-shadow:0 2px 10px rgba(24,33,47,.05);overflow:hidden}
+.ph-head{display:grid;grid-template-columns:auto 1fr auto auto;gap:8px 12px;align-items:center;padding:12px 14px;background:color-mix(in srgb,var(--pc) 10%,#fff)}
+.ph-toggle{width:34px;height:34px;border-radius:9px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px;line-height:1;display:grid;place-items:center}
+.ph-toggle span{display:block;transition:transform .2s}
+.phase.collapsed .ph-toggle span{transform:rotate(-90deg)}
+.ph-title{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;min-width:0}
+.ph-title select{border:1px solid color-mix(in srgb,var(--pc) 55%,#fff);background:color-mix(in srgb,var(--pc) 18%,#fff);border-radius:99px;padding:2px 8px;font-weight:700;font-size:11.5px;text-transform:uppercase;letter-spacing:.08em}
+.ph-title input{border:1px solid transparent;border-radius:8px;background:transparent;padding:4px 6px;min-width:0}
+.ph-title input:hover,.ph-title input:focus{border-color:var(--line);background:#fff}
+.ph-name{font:800 18px var(--font-d);flex:1 1 200px}
+.ph-ms{display:flex;align-items:center;gap:4px;flex:1 1 220px;font-size:13.5px;color:var(--mute)}
+.ph-ms input{flex:1;font-weight:500;color:var(--ink)}
+.ph-prog{display:flex;align-items:center;gap:8px;min-width:140px}
+.ph-prog .meter{flex:1;margin:0;height:9px}
+.ph-prog .meter i{background:var(--pc)}
+.ph-prog b{font-variant-numeric:tabular-nums;font-size:13px;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:700;border:1.5px solid var(--sc);background:#fff;white-space:nowrap}
+.ph-body{padding:6px 14px 14px}
+.phase.collapsed .ph-body{display:none}
+.cols,.task{display:grid;grid-template-columns:30px minmax(160px,1fr) 142px 62px 68px 128px 30px;gap:8px;align-items:center}
+.cols{padding:6px 0;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--line)}
+.task{padding:6px 0;border-bottom:1px dashed var(--line)}
+.task.hide{display:none}
+.task input[type=checkbox]{width:22px;height:22px;accent-color:var(--pc);cursor:pointer;margin:0}
+.t-title{display:flex;align-items:center;gap:6px;min-width:0}
+.t-title input{flex:1;min-width:0;border:1px solid transparent;border-radius:8px;padding:5px 7px;background:transparent}
+.t-title input:hover,.t-title input:focus{border-color:var(--line);background:#fff}
+.t-title a{text-decoration:none;font-weight:700;color:var(--brand2);border:1px solid var(--line);border-radius:6px;padding:0 6px;white-space:nowrap;font-size:12.5px}
+.task.done .t-title input{text-decoration:line-through;color:var(--mute)}
+.task input[type=date],.task input[type=number],.task select{border:1px solid var(--line);border-radius:8px;padding:5px 6px;background:#fff;width:100%;min-width:0;font-size:13.5px}
+.t-end{font-size:13px;color:var(--mute);font-variant-numeric:tabular-nums}
+.task.over .t-end{color:var(--block);font-weight:700}
+.task select.s-done{border-color:var(--done);background:#e8f6ef}
+.task select.s-doing{border-color:var(--doing);background:#e8f0ff}
+.task select.s-blocked{border-color:var(--block);background:#fdecec}
+.x{border:0;background:transparent;color:var(--mute);font-size:18px;cursor:pointer;border-radius:6px;line-height:1;padding:2px 6px}
+.x:hover{background:#fdecec;color:var(--block)}
+.ph-foot{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;margin-top:10px}
+.add-phase{width:100%;justify-content:center;border-style:dashed;padding:12px;font-weight:700;color:var(--brand)}
+.empty{padding:14px 0;color:var(--mute)}
+
+/* dialog + toast */
+dialog{border:0;border-radius:16px;padding:0;max-width:640px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(12,30,40,.55)}
+.dlg{padding:20px}
+.dlg textarea{width:100%;height:190px;border:1px solid var(--line);border-radius:10px;padding:10px;font:12.5px/1.4 ui-monospace,Menlo,Consolas,monospace;resize:vertical}
+.dlg .row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%) translateY(30px);opacity:0;background:#18212f;color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;max-width:calc(100% - 32px);transition:.25s;pointer-events:none;z-index:50}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.foot{margin-top:24px;color:var(--mute);font-size:13px;text-align:center}
+
+@media (max-width:820px){
+  .stages{grid-template-columns:1fr}
+  .ph-head{grid-template-columns:auto 1fr}
+  .ph-prog,.ph-head .pill,.ph-head .x{grid-column:2}
+  .cols{display:none}
+  .task{grid-template-columns:30px 1fr 1fr 30px;grid-template-areas:"c t t x" ". s d x" ". n e st"}
+  .task>.c{grid-area:c}.task>.t-title{grid-area:t}.task>.d-start{grid-area:s}.task>.d-days{grid-area:d}.task>.t-end{grid-area:e}.task>.d-stat{grid-area:st}.task>.x{grid-area:x}
+  .task>.d-days::before{content:""}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  body{background:#fff;font-size:12px}
+  .toolbar,.banner-actions,.ph-toggle,.x,.add-task,.add-phase,.toast,.foot .noprint{display:none!important}
+  .banner{background:#0c5560!important}
+  .tiles{margin-top:10px}
+  .gantt-scroll{overflow:visible}
+  .gantt{min-width:0}
+  .phase,.gantt-card,.tile{box-shadow:none;break-inside:avoid}
+  .phase.collapsed .ph-body{display:block}
+  .task.hide{display:grid}
+  .ph-title input,.ph-title select{border-color:transparent!important;background:transparent!important;-webkit-appearance:none;appearance:none}
+  .task input[type=date],.task input[type=number],.task select{border-color:transparent;-webkit-appearance:none;appearance:none;background:transparent}
+}
+</style>
+</head>
+<body>
+<header class="banner">
+  <div class="wrap">
+    <p class="bismillah" lang="ar" dir="rtl">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ<small>In the name of Allah, the Most Gracious, the Most Merciful</small></p>
+    <p class="eyebrow">The Balanced Middle Path Academy, LLC &middot; Creed-to-Commerce&trade;</p>
+    <h1>Sponsor Compass Checklist</h1>
+    <p class="sub">A date-ordered launch checklist for the Madinah Sponsorship &amp; Recruitment Compass. Tick tasks, change dates, and watch the milestone chart update.</p>
+    <div class="banner-actions">
+      <a class="btn gold" href="https://sponsor-with-crm.vercel.app/" target="_blank" rel="noopener">Open Sponsor-with-CRM &#8599;</a>
+    </div>
+    <div class="stages" id="stageLegend"></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="tiles" id="tiles" aria-label="Progress summary"></section>
+
+  <section class="toolbar" aria-label="Checklist controls">
+    <label class="field">Project start date<input type="date" id="startDate"></label>
+    <label class="field">Show tasks<select id="filter">
+      <option value="all">All tasks</option>
+      <option value="open">Not done yet</option>
+      <option value="doing">In progress</option>
+      <option value="blocked">Blocked</option>
+      <option value="over">Overdue</option>
+    </select></label>
+    <label class="switch"><input type="checkbox" id="detail"> Task bars on chart</label>
+    <span class="tb-spacer"></span>
+    <div class="tb-group">
+      <button class="btn small" data-act="expand">Expand all</button>
+      <button class="btn small" data-act="collapse">Collapse all</button>
+      <button class="btn small" data-act="saveload">Save / Load</button>
+      <button class="btn small" data-act="print">Print</button>
+      <button class="btn small" data-act="reset" id="resetBtn">Reset</button>
+    </div>
+  </section>
+
+  <section class="gantt-card" aria-labelledby="gh">
+    <h2 id="gh">Milestone chart</h2>
+    <p class="sec-sub">Each bar is one phase. The diamond is its milestone, and the label under it shows where it stands today.</p>
+    <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
+    <div class="legend">
+      <span><i class="dm" style="background:var(--done)"></i> Complete</span>
+      <span><i class="dm" style="background:var(--doing)"></i> In progress</span>
+      <span><i class="dm" style="background:var(--block)"></i> Blocked or overdue</span>
+      <span><i class="dm" style="background:#fff;border:2px solid var(--todo)"></i> Not started</span>
+      <span><i class="sw" style="background:linear-gradient(90deg,var(--p1) 50%,color-mix(in srgb,var(--p1) 26%,#fff) 50%)"></i> Bar fill = tasks done</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="ch">
+    <h2 id="ch">Checklist</h2>
+    <p class="sec-sub">Phases run in order of their start dates. Edit any title, date or length. Everything saves in this browser as you go.</p>
+    <div id="phases"></div>
+    <button class="btn add-phase" data-act="add-phase">+ Add a phase</button>
+  </section>
+
+  <p class="foot">Dates are working targets, so adjust them to your real calendar. <span class="noprint">Printing from a preview may be blocked; open the saved HTML file and press Ctrl/Cmd+P.</span></p>
+</main>
+
+<dialog id="dlg">
+  <div class="dlg">
+    <h2>Save or load your checklist</h2>
+    <p class="sec-sub">Your progress is kept in this browser automatically. Use the text below to back it up or move it to another device.</p>
+    <textarea id="dlgText" spellcheck="false" aria-label="Checklist data"></textarea>
+    <div class="row">
+      <button class="btn small" data-act="dl-file">Save as file</button>
+      <button class="btn small" data-act="dl-copy">Copy text</button>
+      <button class="btn small" data-act="dl-load">Load from text</button>
+      <label class="btn small" for="fileIn">Load from file</label>
+      <input type="file" id="fileIn" accept=".json,application/json" hidden>
+      <span class="tb-spacer"></span>
+      <button class="btn small" data-act="dl-close">Close</button>
+    </div>
+  </div>
+</dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+var KEY='bmpa-sponsor-compass-checklist-v1';
+var DAY=86400000;
+var COLORS=['#0f8a6e','#2f6fed','#8b5cf6','#e0457b','#f08a24','#14a3c7','#c99a1e'];
+var STAGES={
+  creed:{label:'Creed',line:'Start with trustworthy intentions.'},
+  service:{label:'Service',line:'Turn those intentions into useful services.'},
+  commerce:{label:'Commerce',line:'Sustain the work through responsible commercial management.'}
+};
+var LABEL={done:'Complete',doing:'In progress',blocked:'Blocked',over:'Overdue',todo:'Not started'};
+var ICON={done:'✓',doing:'◔',blocked:'⚠',over:'⚠',todo:'○'};
+var CRM='https://sponsor-with-crm.vercel.app/';
+
+function uid(){return Math.random().toString(36).slice(2,8);}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function parse(s){var p=String(s).split('-').map(Number);return Date.UTC(p[0],p[1]-1,p[2]);}
+function iso(ms){return new Date(ms).toISOString().slice(0,10);}
+function fmt(ms){return new Date(ms).toLocaleDateString('en-US',{timeZone:'UTC',month:'short',day:'numeric'});}
+function fmtY(ms){return new Date(ms).toLocaleDateString('en-US',{timeZone:'UTC',month:'short',day:'numeric',year:'numeric'});}
+var nowD=new Date();
+var TODAY=Date.UTC(nowD.getFullYear(),nowD.getMonth(),nowD.getDate());
+
+/* ---------- default plan: [title, startDay, days, link] ---------- */
+var PLAN=[
+ {stage:'creed',name:'Set the intention',ms:'Program charter approved',tasks:[
+  ['Write the Bismillah intention and trust principles for the program',0,2],
+  ['Describe the sponsor and recruit journey in plain language',1,3],
+  ['Set conduct, honesty and no-misrepresentation standards',3,3],
+  ['Name the program owner and the people who make decisions',4,2],
+  ['Approve the Creed-to-Commerce™ charter',8,2]]},
+ {stage:'creed',name:'Legal and licensing',ms:'Licence and policies in place',tasks:[
+  ['Confirm licensing and sponsorship rules with the relevant Madinah authority',7,10],
+  ['Draft the sponsor agreement and recruit terms',10,7],
+  ['Write privacy, data-handling and refund policies',14,7],
+  ['Choose a payment channel and set up the BMPA account',17,7],
+  ['Review every document with a legal adviser',21,7]]},
+ {stage:'service',name:'Design the services',ms:'Offers and tiers published',tasks:[
+  ['List the services sponsors and recruits receive',21,5],
+  ['Define sponsorship tiers and what each tier funds',24,6],
+  ['Write the sponsor one-page brief and the recruit info sheet',28,7],
+  ['Build the FAQ and the user manual',31,7],
+  ['Set prices and publish the offers on Payhip',35,7]]},
+ {stage:'service',name:'Configure the CRM',ms:'CRM live and tested',tasks:[
+  ['Open the Sponsor-with-CRM Compass and review every screen',35,3,CRM],
+  ['Set the pipeline stages: lead, contacted, meeting, proposal, committed, active, renewal',37,4,CRM],
+  ['Enter or import the first contacts',40,5,CRM],
+  ['Test one full sponsor record from lead to renewal',44,4,CRM],
+  ['Export a backup and a Manager Report PDF as a dry run (data stays in the browser until exported)',47,5,CRM]]},
+ {stage:'service',name:'Outreach and recruitment',ms:'Pilot cohort committed',tasks:[
+  ['Draft outreach scripts and follow-up emails in Kit',49,5],
+  ['Announce on Instagram, TikTok and the website',52,7],
+  ['Contact the first 20 prospective sponsors',56,10],
+  ['Hold discovery calls and log each one in the CRM',60,14,CRM],
+  ['Send proposals and collect the first commitments',70,7]]},
+ {stage:'commerce',name:'Onboard and serve',ms:'First cohort onboarded',tasks:[
+  ['Send the welcome pack and sign agreements',70,7],
+  ['Deliver first-month services and confirm receipt',77,14],
+  ['Report back to each sponsor with proof of impact',88,7],
+  ['Resolve open concerns and record lessons learned',92,7],
+  ['Generate the first Manager Report PDF',98,3,CRM]]},
+ {stage:'commerce',name:'Review and scale',ms:'Scale decision made',tasks:[
+  ['Compare income, costs and refunds with the plan',98,7],
+  ['Survey sponsors and recruits for feedback',101,7],
+  ['Adjust pipeline stages and scripts using the results',105,7],
+  ['Plan renewals and the next cohort',109,10],
+  ['Decide whether to scale up or adjust',119,7]]}
+];
+
+function defaultState(){
+  var d=new Date(TODAY);var dow=d.getUTCDay();var add=((8-dow)%7)||7; /* next Monday */
+  return {
+    start:iso(TODAY+add*DAY), detail:false, filter:'all',
+    phases:PLAN.map(function(p,i){return {id:uid(),stage:p.stage,name:p.name,ms:p.ms,color:COLORS[i%COLORS.length],open:i<2,
+      tasks:p.tasks.map(function(t){return {id:uid(),t:t[0],s:t[1],d:t[2],st:'todo',link:t[3]||''};})};})
+  };
+}
+
+var S=load();
+function load(){
+  try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);if(valid(o))return o;}}catch(e){}
+  return defaultState();
+}
+function valid(o){return o&&typeof o.start==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(o.start)&&Array.isArray(o.phases)&&o.phases.every(function(p){return p&&Array.isArray(p.tasks);});}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+/* ---------- helpers ---------- */
+function startMs(){return parse(S.start);}
+function dayMs(n){return startMs()+n*DAY;}
+function todayIdx(){return Math.round((TODAY-startMs())/DAY);}
+function taskOver(t){return t.st!=='done'&&todayIdx()>t.s+t.d-1;}
+function taskKey(t){return t.st==='done'?'done':t.st==='blocked'?'blocked':taskOver(t)?'over':t.st==='doing'?'doing':'todo';}
+function info(p){
+  var n=p.tasks.length,done=p.tasks.filter(function(t){return t.st==='done';}).length;
+  var minS=n?Math.min.apply(null,p.tasks.map(function(t){return t.s;})):0;
+  var maxE=n?Math.max.apply(null,p.tasks.map(function(t){return t.s+t.d;})):0;
+  var key='todo';
+  if(n&&done===n)key='done';
+  else if(p.tasks.some(function(t){return t.st==='blocked';}))key='blocked';
+  else if(n&&todayIdx()>maxE-1)key='over';
+  else if(done||p.tasks.some(function(t){return t.st==='doing';}))key='doing';
+  return {n:n,done:done,minS:minS,maxE:maxE,pct:n?Math.round(done/n*100):0,key:key};
+}
+function totalDays(){
+  var m=0;S.phases.forEach(function(p){p.tasks.forEach(function(t){m=Math.max(m,t.s+t.d);});});
+  return Math.max(14,Math.ceil(m/7)*7);
+}
+function sortedPhases(){
+  return S.phases.map(function(p,i){return {p:p,i:i,inf:info(p)};}).sort(function(a,b){return (a.inf.minS-b.inf.minS)||(a.i-b.i);});
+}
+
+/* ---------- render: static pieces ---------- */
+function renderLegend(){
+  document.getElementById('stageLegend').innerHTML=Object.keys(STAGES).map(function(k){
+    return '<div class="stage-card"><b>'+STAGES[k].label+'</b><span>'+STAGES[k].line+'</span></div>';}).join('');
+}
+
+function renderTiles(){
+  var all=[],ms=0,msDone=0;
+  S.phases.forEach(function(p){p.tasks.forEach(function(t){all.push(t);});var i=info(p);if(i.n){ms++;if(i.key==='done')msDone++;}});
+  var done=all.filter(function(t){return t.st==='done';}).length;
+  var pct=all.length?Math.round(done/all.length*100):0;
+  var over=all.filter(taskOver).length, blocked=all.filter(function(t){return t.st==='blocked';}).length;
+  var next=sortedPhases().filter(function(x){return x.inf.n&&x.inf.key!=='done';}).sort(function(a,b){return a.inf.maxE-b.inf.maxE;})[0];
+  var endDay=totalDays(), lastEnd=0;S.phases.forEach(function(p){var i=info(p);if(i.maxE>lastEnd)lastEnd=i.maxE;});
+  var finish=dayMs(lastEnd-1), left=Math.round((finish-TODAY)/DAY);
+  var leftTxt=!all.length?'':left>=0?left+' days from today':Math.abs(left)+' days past';
+  var h='';
+  h+='<div class="tile" style="--t:var(--p1)"><small>Overall progress</small><strong>'+pct+'%</strong><div class="meter"><i style="width:'+pct+'%"></i></div></div>';
+  h+='<div class="tile" style="--t:var(--p2)"><small>Tasks done</small><strong>'+done+' / '+all.length+'</strong><em>'+(blocked?blocked+' blocked, ':'')+over+' overdue</em></div>';
+  h+='<div class="tile" style="--t:var(--p3)"><small>Milestones reached</small><strong>'+msDone+' / '+ms+'</strong><em>'+(next?'Next: '+esc(next.p.ms):'All milestones reached')+'</em></div>';
+  h+='<div class="tile" style="--t:var(--gold)"><small>Target finish</small><strong>'+(all.length?fmtY(finish):'-')+'</strong><em>'+leftTxt+'</em></div>';
+  document.getElementById('tiles').innerHTML=h;
+}
+
+function renderGantt(){
+  var total=totalDays(),weeks=total/7,n=weeks;
+  var head='';for(var i=0;i<weeks;i++){head+='<div class="wk"><b>W'+(i+1)+'</b>'+fmt(dayMs(i*7))+'</div>';}
+  var h='<div class="g-row g-head"><div></div><div class="weeks" style="--n:'+n+'">'+head+'</div></div>';
+  sortedPhases().forEach(function(x){
+    var p=x.p,inf=x.inf,pc='--pc:'+p.color+';';
+    h+='<div class="g-row" style="'+pc+'"><button class="g-label" data-goto="'+p.id+'"><span class="dot"></span>'+esc(p.name)+'<small>&#9670; '+esc(p.ms)+'</small></button>';
+    h+='<div class="track" style="--wk:'+(100/weeks)+'%">';
+    if(inf.n){
+      var L=inf.minS/total*100,W=(inf.maxE-inf.minS)/total*100,E=inf.maxE/total*100;
+      var lbl=esc(p.ms)+' · '+ICON[inf.key]+' '+LABEL[inf.key]+(inf.key==='doing'?' '+inf.pct+'%':'');
+      h+='<div class="bar" style="left:'+L+'%;width:'+W+'%" title="'+esc(p.name)+': '+fmt(dayMs(inf.minS))+' to '+fmt(dayMs(inf.maxE-1))+'"><i style="width:'+inf.pct+'%"></i><em>'+inf.pct+'%</em></div>';
+      h+='<div class="dia k-'+inf.key+'" style="left:'+E+'%"></div>';
+      h+='<div class="mspill k-'+inf.key+'" style="'+(E>58?'right:'+(100-E)+'%;margin-right:-4px':'left:'+E+'%;margin-left:-4px')+'">'+lbl+'</div>';
+    }else{h+='<div class="mspill k-todo" style="left:4px">No tasks yet</div>';}
+    h+='</div></div>';
+    if(S.detail){
+      p.tasks.slice().sort(function(a,b){return a.s-b.s;}).forEach(function(t){
+        h+='<div class="g-row trow" style="'+pc+'"><div class="g-label" title="'+esc(t.t)+'">'+esc(t.t)+'</div><div class="track thin" style="--wk:'+(100/weeks)+'%"><div class="tbar k-'+taskKey(t)+'" style="left:'+(t.s/total*100)+'%;width:'+(t.d/total*100)+'%" title="'+esc(t.t)+' ('+fmt(dayMs(t.s))+' to '+fmt(dayMs(t.s+t.d-1))+')"></div></div></div>';
+      });
+    }
+  });
+  var ti=todayIdx();
+  if(ti>=0&&ti<=total){
+    h+='<div style="position:absolute;top:0;bottom:0;left:210px;right:0;pointer-events:none"><div class="today" style="left:'+(ti/total*100)+'%"><span>Today</span></div></div>';
+  }
+  document.getElementById('gantt').innerHTML=h;
+}
+
+/* ---------- render: phases ---------- */
+function taskRow(p,t){
+  var k=taskKey(t);
+  return '<div class="task'+(t.st==='done'?' done':'')+(k==='over'?' over':'')+'" data-tid="'+t.id+'" data-pid="'+p.id+'">'+
+   '<input class="c" type="checkbox" data-act="t-check" aria-label="Done: '+esc(t.t)+'"'+(t.st==='done'?' checked':'')+'>'+
+   '<div class="t-title"><input type="text" data-act="t-title" value="'+esc(t.t)+'" aria-label="Task title">'+(t.link?'<a href="'+esc(t.link)+'" target="_blank" rel="noopener" title="Open Sponsor-with-CRM">CRM &#8599;</a>':'')+'</div>'+
+   '<input class="d-start" type="date" data-act="t-start" value="'+iso(dayMs(t.s))+'" aria-label="Start date">'+
+   '<input class="d-days" type="number" min="1" max="365" data-act="t-days" value="'+t.d+'" aria-label="Days">'+
+   '<span class="t-end" data-role="end">'+(k==='over'?'Overdue · ':'')+fmt(dayMs(t.s+t.d-1))+'</span>'+
+   '<select class="d-stat s-'+t.st+'" data-act="t-status" aria-label="Status">'+
+     ['todo','doing','blocked','done'].map(function(s){return '<option value="'+s+'"'+(t.st===s?' selected':'')+'>'+({todo:'Not started',doing:'In progress',blocked:'Blocked',done:'Done'})[s]+'</option>';}).join('')+
+   '</select>'+
+   '<button class="x" data-act="del-task" aria-label="Delete task" title="Delete task">&times;</button></div>';
+}
+function phaseHtml(p){
+  var inf=info(p);
+  var h='<section class="phase'+(p.open?'':' collapsed')+'" id="ph-'+p.id+'" data-pid="'+p.id+'" style="--pc:'+p.color+'">';
+  h+='<div class="ph-head"><button class="ph-toggle" data-act="toggle" aria-label="Show or hide tasks" aria-expanded="'+(p.open?'true':'false')+'"><span>&#9662;</span></button>';
+  h+='<div class="ph-title"><select data-act="ph-stage" aria-label="Creed-to-Commerce stage">'+Object.keys(STAGES).map(function(k){return '<option value="'+k+'"'+(p.stage===k?' selected':'')+'>'+STAGES[k].label+'</option>';}).join('')+'</select>';
+  h+='<input class="ph-name" type="text" data-act="ph-name" value="'+esc(p.name)+'" aria-label="Phase name">';
+  h+='<label class="ph-ms">&#9670;<input type="text" data-act="ph-ms" value="'+esc(p.ms)+'" aria-label="Milestone name"></label></div>';
+  h+='<div class="ph-prog"><div class="meter"><i data-role="pbar" style="width:'+inf.pct+'%"></i></div><b data-role="pcount">'+inf.done+'/'+inf.n+'</b></div>';
+  h+='<span class="pill k-'+inf.key+'" data-role="pstatus">'+ICON[inf.key]+' '+LABEL[inf.key]+'</span></div>';
+  h+='<div class="ph-body"><div class="cols"><span></span><span>Task</span><span>Starts</span><span>Days</span><span>Ends</span><span>Status</span><span></span></div>';
+  h+=p.tasks.length?p.tasks.map(function(t){return taskRow(p,t);}).join(''):'<div class="empty">No tasks yet. Add the first one below.</div>';
+  h+='<div class="ph-foot"><button class="btn small add-task" data-act="add-task">+ Add a task</button><button class="btn small" data-act="del-phase">Delete phase</button></div></div></section>';
+  return h;
+}
+function renderPhases(){
+  document.getElementById('phases').innerHTML=sortedPhases().map(function(x){return phaseHtml(x.p);}).join('');
+  applyFilter();
+}
+function applyFilter(){
+  var f=S.filter||'all';
+  S.phases.forEach(function(p){p.tasks.forEach(function(t){
+    var el=document.querySelector('.task[data-tid="'+t.id+'"]');if(!el)return;
+    var k=taskKey(t),show=true;
+    if(f==='open')show=t.st!=='done';
+    else if(f==='doing')show=t.st==='doing';
+    else if(f==='blocked')show=t.st==='blocked';
+    else if(f==='over')show=k==='over';
+    el.classList.toggle('hide',!show);
+  });});
+}
+
+/* light refresh: keeps focus in inputs */
+function refresh(){
+  renderTiles();renderGantt();
+  S.phases.forEach(function(p){
+    var sec=document.getElementById('ph-'+p.id);if(!sec)return;
+    var inf=info(p);
+    sec.querySelector('[data-role=pbar]').style.width=inf.pct+'%';
+    sec.querySelector('[data-role=pcount]').textContent=inf.done+'/'+inf.n;
+    var ps=sec.querySelector('[data-role=pstatus]');ps.className='pill k-'+inf.key;ps.textContent=ICON[inf.key]+' '+LABEL[inf.key];
+    p.tasks.forEach(function(t){
+      var el=sec.querySelector('.task[data-tid="'+t.id+'"]');if(!el)return;
+      var k=taskKey(t);
+      el.classList.toggle('done',t.st==='done');el.classList.toggle('over',k==='over');
+      el.querySelector('[data-role=end]').textContent=(k==='over'?'Overdue · ':'')+fmt(dayMs(t.s+t.d-1));
+      var sel=el.querySelector('select');sel.className='d-stat s-'+t.st;sel.value=t.st;
+      el.querySelector('input[type=checkbox]').checked=t.st==='done';
+      var ds=el.querySelector('.d-start');if(ds!==document.activeElement)ds.value=iso(dayMs(t.s));
+    });
+  });
+  applyFilter();
+  save();
+}
+function renderAll(){
+  document.getElementById('startDate').value=S.start;
+  document.getElementById('filter').value=S.filter||'all';
+  document.getElementById('detail').checked=!!S.detail;
+  renderLegend();renderTiles();renderGantt();renderPhases();save();
+}
+
+/* ---------- lookups ---------- */
+function findP(id){for(var i=0;i<S.phases.length;i++)if(S.phases[i].id===id)return S.phases[i];}
+function findT(p,id){for(var i=0;i<p.tasks.length;i++)if(p.tasks[i].id===id)return p.tasks[i];}
+function ctx(el){
+  var row=el.closest('.task'),sec=el.closest('.phase');
+  var p=sec?findP(sec.dataset.pid):null,t=(p&&row)?findT(p,row.dataset.tid):null;
+  return {p:p,t:t,row:row,sec:sec};
+}
+
+/* ---------- toast ---------- */
+var toastT;
+function toast(msg){var el=document.getElementById('toast');el.textContent=msg;el.classList.add('on');clearTimeout(toastT);toastT=setTimeout(function(){el.classList.remove('on');},4200);}
+
+/* ---------- events ---------- */
+document.addEventListener('change',function(e){
+  var el=e.target,act=el.dataset&&el.dataset.act,c;
+  if(el.id==='startDate'){if(el.value){S.start=el.value;renderAll();}return;}
+  if(el.id==='filter'){S.filter=el.value;applyFilter();save();return;}
+  if(el.id==='detail'){S.detail=el.checked;renderGantt();save();return;}
+  if(el.id==='fileIn'){readFile(el.files&&el.files[0]);el.value='';return;}
+  if(!act)return;
+  c=ctx(el);
+  if(act==='ph-name'&&c.p){c.p.name=el.value.trim()||'Untitled phase';refresh();}
+  else if(act==='ph-ms'&&c.p){c.p.ms=el.value.trim()||'Milestone';refresh();}
+  else if(act==='ph-stage'&&c.p){c.p.stage=el.value;save();}
+  else if(act==='t-title'&&c.t){c.t.t=el.value.trim()||'Untitled task';refresh();}
+  else if(act==='t-start'&&c.t){
+    if(!el.value){el.value=iso(dayMs(c.t.s));return;}
+    var s=Math.round((parse(el.value)-startMs())/DAY);
+    if(s<0){s=0;toast('Tasks cannot start before the project start date.');}
+    c.t.s=s;el.value=iso(dayMs(s));refresh();
+  }
+  else if(act==='t-days'&&c.t){c.t.d=Math.max(1,Math.min(365,parseInt(el.value,10)||1));el.value=c.t.d;refresh();}
+  else if(act==='t-status'&&c.t){c.t.st=el.value;refresh();}
+  else if(act==='t-check'&&c.t){c.t.st=el.checked?'done':'todo';refresh();}
+});
+
+var armed=null,armT;
+function arm(btn,key,txt){
+  if(armed===key){armed=null;clearTimeout(armT);return true;}
+  armed=key;btn.dataset.old=btn.textContent;btn.textContent=txt;btn.classList.add('armed');
+  clearTimeout(armT);armT=setTimeout(function(){armed=null;btn.textContent=btn.dataset.old;btn.classList.remove('armed');},3500);
+  return false;
+}
+
+document.addEventListener('click',function(e){
+  var g=e.target.closest('[data-goto]');
+  if(g){var p=findP(g.dataset.goto);if(p){p.open=true;var sec=document.getElementById('ph-'+p.id);if(sec){sec.classList.remove('collapsed');sec.scrollIntoView({behavior:'smooth',block:'start'});}save();}return;}
+  var b=e.target.closest('[data-act]');if(!b||b.tagName==='INPUT'||b.tagName==='SELECT')return;
+  var act=b.dataset.act,c=ctx(b);
+  if(act==='toggle'&&c.p){c.p.open=!c.p.open;c.sec.classList.toggle('collapsed',!c.p.open);b.setAttribute('aria-expanded',c.p.open);save();}
+  else if(act==='expand'||act==='collapse'){S.phases.forEach(function(p){p.open=(act==='expand');});renderPhases();save();}
+  else if(act==='add-task'&&c.p){
+    var last=c.p.tasks.reduce(function(m,t){return Math.max(m,t.s+t.d);},0)||Math.max(0,todayIdx());
+    c.p.tasks.push({id:uid(),t:'New task',s:last,d:3,st:'todo',link:''});c.p.open=true;renderPhases();refresh();
+    var nt=c.p.tasks[c.p.tasks.length-1],inp=document.querySelector('.task[data-tid="'+nt.id+'"] input[type=text]');if(inp){inp.focus();inp.select();}
+  }
+  else if(act==='del-task'&&c.t){c.p.tasks=c.p.tasks.filter(function(t){return t!==c.t;});c.row.remove();refresh();}
+  else if(act==='add-phase'){
+    var n=S.phases.length,startD=S.phases.reduce(function(m,p){var i=info(p);return Math.max(m,i.maxE);},0);
+    S.phases.push({id:uid(),stage:'commerce',name:'New phase',ms:'New milestone',color:COLORS[n%COLORS.length],open:true,tasks:[{id:uid(),t:'First task',s:startD,d:7,st:'todo',link:''}]});
+    renderAll();var el=document.getElementById('ph-'+S.phases[n].id);if(el)el.scrollIntoView({behavior:'smooth',block:'center'});
+  }
+  else if(act==='del-phase'&&c.p){
+    if(arm(b,'dp'+c.p.id,'Tap again to delete')){S.phases=S.phases.filter(function(p){return p!==c.p;});renderAll();}
+  }
+  else if(act==='reset'){
+    if(arm(b,'reset','Tap again to reset')){S=defaultState();renderAll();toast('Checklist reset to the starting plan.');}
+  }
+  else if(act==='print'){
+    S.phases.forEach(function(p){p.open=true;});
+    try{window.print();}catch(err){}
+    toast('If no print window opened, press Ctrl/Cmd+P. Previews can block printing; the saved file prints normally.');
+  }
+  else if(act==='saveload'){var d=document.getElementById('dlg'),ta=document.getElementById('dlgText');ta.value=JSON.stringify(S,null,1);if(d.showModal)d.showModal();else d.setAttribute('open','');}
+  else if(act==='dl-close'){document.getElementById('dlg').close();}
+  else if(act==='dl-copy'){
+    var ta2=document.getElementById('dlgText');ta2.value=JSON.stringify(S,null,1);ta2.select();
+    try{navigator.clipboard.writeText(ta2.value).then(function(){toast('Copied.');},function(){toast('Select the text and copy it with Ctrl/Cmd+C.');});}catch(err){toast('Select the text and copy it with Ctrl/Cmd+C.');}
+  }
+  else if(act==='dl-load'){importText(document.getElementById('dlgText').value);}
+  else if(act==='dl-file'){download('sponsor-compass-checklist.json',JSON.stringify(S,null,1));}
+});
+
+function importText(txt){
+  try{var o=JSON.parse(txt);if(!valid(o))throw new Error('bad');
+    o.phases.forEach(function(p,i){p.id=p.id||uid();p.color=p.color||COLORS[i%COLORS.length];p.stage=STAGES[p.stage]?p.stage:'service';p.name=p.name||'Phase';p.ms=p.ms||'Milestone';
+      p.tasks.forEach(function(t){t.id=t.id||uid();t.s=Math.max(0,parseInt(t.s,10)||0);t.d=Math.max(1,parseInt(t.d,10)||1);t.st=['todo','doing','blocked','done'].indexOf(t.st)>-1?t.st:'todo';t.t=t.t||'Task';t.link=t.link||'';});});
+    S=o;renderAll();document.getElementById('dlg').close();toast('Checklist loaded.');
+  }catch(err){toast('That text is not a saved checklist. Paste the full text you saved earlier.');}
+}
+function readFile(f){if(!f)return;var r=new FileReader();r.onload=function(){importText(String(r.result));};r.readAsText(f);}
+
+async function download(name,text){
+  try{
+    if(window.claude&&window.claude.use){
+      var d=await window.claude.use('downloads');
+      if(d){await d.save({filename:name,data:text});return;}
+    }
+  }catch(err){if(err&&err.code==='declined')return;}
+  try{
+    var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'application/json'}));a.download=name;
+    document.body.appendChild(a);a.click();a.remove();
+  }catch(err2){toast('Saving a file is not available here. Use Copy text instead.');}
+}
+
+renderAll();
+})();
+</script>
+</body>
+</html>
